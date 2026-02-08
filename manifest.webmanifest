@@ -1,0 +1,18 @@
+{
+  "name": "放課後メモリーズ",
+  "short_name": "放課後メモリーズ",
+  "description": "短編恋愛シミュレーション",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1128",
+  "theme_color": "#1a1128",
+  "icons": [
+    {
+      "src": "./images/misaki_hoshizora.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

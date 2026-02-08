@@ -2,75 +2,163 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#1a1128" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>放課後メモリーズ</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <div id="particles" class="particles"></div>
+    <div id="fadeOverlay" class="fade-overlay"></div>
+
+    <div id="achievementToast" class="achievement-toast hidden">
+      <span id="toastIcon" class="toast-icon"></span>
+      <div class="toast-body">
+        <p id="toastName" class="toast-name"></p>
+        <p id="toastDesc" class="toast-desc"></p>
+      </div>
+    </div>
+
     <main class="app">
+      <!-- Title Screen -->
       <section id="titleScreen" class="screen active">
-        <div class="card title-card">
-          <p class="eyebrow">縦画面・15分恋愛シミュレーション</p>
-          <h1>放課後メモリーズ</h1>
-          <p class="summary">
-            主人公はあなた。文化祭までの5日間で、クラスメイトの
-            <strong>星空みさき</strong> と距離を縮められるか。
+        <div class="title-content">
+          <p class="eyebrow">短編恋愛シミュレーション</p>
+          <h1 class="title-logo">放課後<br />メモリーズ</h1>
+          <p class="title-sub">
+            文化祭までの5日間で、<strong>星空みさき</strong>と距離を縮められるか。
           </p>
-          <button id="startBtn" class="btn primary">はじめる</button>
-          <button id="loadBtnTitle" class="btn ghost">つづきから</button>
+          <div class="title-buttons">
+            <button id="startBtn" class="btn primary btn-lg pulse-glow">はじめる</button>
+            <button id="loadBtnTitle" class="btn glass">つづきから</button>
+            <div class="title-row">
+              <button id="galleryBtnTitle" class="btn glass btn-sm">🖼 ギャラリー</button>
+              <button id="profileBtnTitle" class="btn glass btn-sm">👤 プロフィール</button>
+              <button id="achievementBtnTitle" class="btn glass btn-sm">🏆 実績</button>
+            </div>
+          </div>
         </div>
       </section>
 
+      <!-- Game Screen -->
       <section id="gameScreen" class="screen">
         <header class="hud">
-          <div id="dayLabel">Day 1</div>
+          <div id="dayLabel" class="day-badge">Day 1</div>
+          <div id="heartGauge" class="heart-gauge"></div>
+          <button id="menuBtn" class="btn-icon">☰</button>
         </header>
 
         <section id="bg" class="bg">
           <div class="gradient-overlay"></div>
           <img id="charImage" src="./images/misaki_hoshizora.png" alt="星空みさき" />
           <div class="overlay-top">
-            <p id="overlayAffection" class="badge">親密度: 0</p>
-            <p id="overlayMood" class="badge">感情: 😊</p>
+            <p id="overlayMood" class="badge mood-badge">😊</p>
           </div>
           <div class="overlay-bottom">
             <p id="charName">星空みさき</p>
           </div>
         </section>
 
-        <section class="dialog">
+        <section id="dialogBox" class="dialog">
           <p id="speaker" class="speaker">Narrator</p>
+          <div id="messageArea" class="message-area hidden"></div>
           <p id="text" class="text"></p>
+          <div id="timerBar" class="timer-bar hidden">
+            <div id="timerFill" class="timer-fill"></div>
+          </div>
           <div id="choices" class="choices"></div>
         </section>
 
         <footer class="controls">
           <button id="nextBtn" class="btn primary">次へ</button>
-          <button id="autoBtn" class="btn">オート</button>
-          <button id="saveBtn" class="btn">保存</button>
-          <button id="loadBtn" class="btn">読込</button>
-          <button id="logBtn" class="btn">ログ</button>
-          <button id="titleBtn" class="btn danger">タイトル</button>
+          <button id="autoBtn" class="btn glass">オート</button>
+          <button id="menuOpenBtn" class="btn glass">メニュー</button>
         </footer>
       </section>
 
+      <!-- Ending Screen -->
       <section id="endingScreen" class="screen">
         <div class="card ending-card">
           <p class="eyebrow">Ending</p>
-          <img id="endingImage" src="./images/misaki_scenes/ending_normal.png" alt="エンディング画像" />
+          <img id="endingImage" src="" alt="エンディング画像" />
           <h2 id="endingTitle">結果</h2>
           <p id="endingText"></p>
-          <button id="restartBtn" class="btn primary">もう一度あそぶ</button>
-          <button id="endingTitleBtn" class="btn ghost">タイトルへ</button>
+          <p id="endingAffection" class="ending-affection"></p>
+          <div class="ending-buttons">
+            <button id="restartBtn" class="btn primary btn-lg">もう一度あそぶ</button>
+            <button id="endingTitleBtn" class="btn glass">タイトルへ</button>
+          </div>
         </div>
+      </section>
+
+      <!-- Gallery Screen -->
+      <section id="galleryScreen" class="screen">
+        <header class="screen-header">
+          <button id="galleryBackBtn" class="btn-icon">‹</button>
+          <h2>ギャラリー</h2>
+        </header>
+        <div id="galleryGrid" class="gallery-grid"></div>
+      </section>
+
+      <!-- Profile Screen -->
+      <section id="profileScreen" class="screen">
+        <header class="screen-header">
+          <button id="profileBackBtn" class="btn-icon">‹</button>
+          <h2>プロフィール</h2>
+        </header>
+        <div class="profile-content">
+          <div class="profile-avatar-wrap">
+            <img class="profile-avatar" src="./images/misaki_hoshizora.png" alt="みさき" />
+          </div>
+          <h3 class="profile-name">星空みさき</h3>
+          <p class="profile-sub">クラスメイト / 文化祭実行委員</p>
+          <div id="profileItems" class="profile-items"></div>
+        </div>
+      </section>
+
+      <!-- Achievement Screen -->
+      <section id="achievementScreen" class="screen">
+        <header class="screen-header">
+          <button id="achievementBackBtn" class="btn-icon">‹</button>
+          <h2>実績</h2>
+        </header>
+        <div id="achievementList" class="achievement-list"></div>
       </section>
     </main>
 
+    <!-- Dialogs -->
     <dialog id="logDialog">
-      <article class="log-panel">
+      <article class="dialog-panel">
         <h3>バックログ</h3>
         <div id="logBody" class="log-body"></div>
         <button id="closeLogBtn" class="btn primary">閉じる</button>
+      </article>
+    </dialog>
+
+    <dialog id="menuDialog">
+      <article class="dialog-panel menu-panel">
+        <h3>メニュー</h3>
+        <div class="menu-grid">
+          <button id="menuSaveBtn" class="btn glass menu-item">💾 保存</button>
+          <button id="menuLoadBtn" class="btn glass menu-item">📂 読込</button>
+          <button id="menuLogBtn" class="btn glass menu-item">📜 ログ</button>
+          <button id="menuGalleryBtn" class="btn glass menu-item">🖼 ギャラリー</button>
+          <button id="menuProfileBtn" class="btn glass menu-item">👤 プロフィール</button>
+          <button id="menuAchievementBtn" class="btn glass menu-item">🏆 実績</button>
+        </div>
+        <button id="menuTitleBtn" class="btn danger menu-full">タイトルへ戻る</button>
+        <button id="menuCloseBtn" class="btn glass menu-full">閉じる</button>
+      </article>
+    </dialog>
+
+    <dialog id="galleryViewDialog">
+      <article class="gallery-view-panel">
+        <img id="galleryViewImage" src="" alt="" />
+        <p id="galleryViewName" class="gallery-view-name"></p>
+        <button id="galleryViewCloseBtn" class="btn-icon gallery-close-btn">✕</button>
       </article>
     </dialog>
 
