@@ -1,0 +1,12 @@
+{
+  "intro_1": "./images/misaki_scenes/intro_1.png",
+  "day1_after": "./images/misaki_scenes/day1_after.png",
+  "day2_morning": "./images/misaki_scenes/day2_morning.png",
+  "day2_after": "./images/misaki_scenes/day2_after.png",
+  "day3": "./images/misaki_scenes/day3.png",
+  "day4": "./images/misaki_scenes/day4.png",
+  "day5": "./images/misaki_scenes/day5.png",
+  "ending_best": "./images/misaki_scenes/ending_best.png",
+  "ending_good": "./images/misaki_scenes/ending_good.png",
+  "ending_normal": "./images/misaki_scenes/ending_normal.png"
+}

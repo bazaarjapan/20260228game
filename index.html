@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>放課後メモリーズ</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="titleScreen" class="screen active">
+        <div class="card title-card">
+          <p class="eyebrow">縦画面・15分恋愛シミュレーション</p>
+          <h1>放課後メモリーズ</h1>
+          <p class="summary">
+            主人公はあなた。文化祭までの5日間で、クラスメイトの
+            <strong>星空みさき</strong> と距離を縮められるか。
+          </p>
+          <button id="startBtn" class="btn primary">はじめる</button>
+          <button id="loadBtnTitle" class="btn ghost">つづきから</button>
+        </div>
+      </section>
+
+      <section id="gameScreen" class="screen">
+        <header class="hud">
+          <div id="dayLabel">Day 1</div>
+        </header>
+
+        <section id="bg" class="bg">
+          <div class="gradient-overlay"></div>
+          <img id="charImage" src="./images/misaki_hoshizora.png" alt="星空みさき" />
+          <div class="overlay-top">
+            <p id="overlayAffection" class="badge">親密度: 0</p>
+            <p id="overlayMood" class="badge">感情: 😊</p>
+          </div>
+          <div class="overlay-bottom">
+            <p id="charName">星空みさき</p>
+          </div>
+        </section>
+
+        <section class="dialog">
+          <p id="speaker" class="speaker">Narrator</p>
+          <p id="text" class="text"></p>
+          <div id="choices" class="choices"></div>
+        </section>
+
+        <footer class="controls">
+          <button id="nextBtn" class="btn primary">次へ</button>
+          <button id="autoBtn" class="btn">オート</button>
+          <button id="saveBtn" class="btn">保存</button>
+          <button id="loadBtn" class="btn">読込</button>
+          <button id="logBtn" class="btn">ログ</button>
+          <button id="titleBtn" class="btn danger">タイトル</button>
+        </footer>
+      </section>
+
+      <section id="endingScreen" class="screen">
+        <div class="card ending-card">
+          <p class="eyebrow">Ending</p>
+          <img id="endingImage" src="./images/misaki_scenes/ending_normal.png" alt="エンディング画像" />
+          <h2 id="endingTitle">結果</h2>
+          <p id="endingText"></p>
+          <button id="restartBtn" class="btn primary">もう一度あそぶ</button>
+          <button id="endingTitleBtn" class="btn ghost">タイトルへ</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="logDialog">
+      <article class="log-panel">
+        <h3>バックログ</h3>
+        <div id="logBody" class="log-body"></div>
+        <button id="closeLogBtn" class="btn primary">閉じる</button>
+      </article>
+    </dialog>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
